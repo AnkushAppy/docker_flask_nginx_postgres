@@ -1,0 +1,26 @@
+version: "2"
+
+services:
+  flask_web:
+    build: ./flask_web
+    expose:
+      - "5000"
+    env_file:
+      - ./flask_web/.env
+    links:
+      - postgres
+    command: python app.py
+
+  nginx:
+    build: ./nginx
+    ports:
+      - "80:80"
+    links:
+      - flask_web
+
+  postgres:
+    image: postgres:9.6
+    ports:
+      - "5432:5432"
+    env_file:
+      - ./flask_web/.env
