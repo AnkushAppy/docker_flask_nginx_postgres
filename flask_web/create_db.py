@@ -1,5 +1,6 @@
 from app import db
 
+
 db.create_all()
 admin = User('admin', 'admin@example.com')
 guest = User('guest', 'guest@example.com')
